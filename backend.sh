@@ -37,7 +37,7 @@ VALIDATE(){
 
 CHECK_ROOT #I am calling CHECK_ROOT function
 
-dnf module disable nodejs -y &>> $FILE_NAME
+dnf module disable nodejs:18 -y &>> $FILE_NAME
 VALIDATE $?  "disabling NodeJs"
 
 dnf module enable nodejs:20 -y &>> $FILE_NAME
