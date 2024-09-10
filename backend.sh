@@ -11,7 +11,7 @@ SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
 TIMESTAMP=$(date +%Y-%m-%d-%H-%M-%S)
 FILE_NAME="$LOGS_FOLDER/$SCRIPT_NAME-$TIMESTAMP.log"
 echo "$FILE_NAME"
-mkdir -p $LOGS_FOLDER &>> $FILE_NAME
+mkdir -p /var/log/expense &>> $FILE_NAME
 echo "script started executing at: $(date)" | tee -a $FILE_NAME
 
 USER=$(id -u)
