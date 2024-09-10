@@ -37,7 +37,7 @@ VALIDATE(){
 
 CHECK_ROOT #I am calling CHECK_ROOT function
 
-dnf install mysql-server -y
+dnf install mysql-server -y &>>$FILE_NAME
 VALIDATE $? "mysql installation"
 
 systemctl enable mysqld
