@@ -12,7 +12,7 @@ TIMESTAMP=$(date +%Y-%m-%d-%H-%M-%S)
 FILE_NAME="$LOGS_FOLDER/$SCRIPT_NAME-$TIMESTAMP.log"
 echo "$FILE_NAMEz"
 mkdir -p $LOGS_FOLDER &>> $FILE_NAME
-echo "script started executing at: $(date)" &>>$FILE_NAME
+echo "script started executing at: $(date)" | tee -a $FILE_NAME
 
 USER=$(id -u)
 
