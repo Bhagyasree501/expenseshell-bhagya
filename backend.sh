@@ -37,14 +37,14 @@ VALIDATE(){
 
 CHECK_ROOT #I am calling CHECK_ROOT function
 
-dnf module disable nodejs -y &>>$FILE_NAME
+dnf module disable nodejs -y &>> $FILE_NAME
 VALIDATE $?  "disabling NodeJs"
 
-dnf module enable nodejs:20 -y &>>$FILE_NAME
+dnf module enable nodejs:20 -y &>> $FILE_NAME
 VALIDATE $? "enabling version 20 of NodeJs"
 
-dnf install nodejs -y &>>$FILE_NAME
+dnf install nodejs -y &>> $FILE_NAME
 VALIDATE $? "installing NodeJs"
 
-useradd expense &>>$FILE_NAME
+useradd expense &>> $FILE_NAME
 VALIDATE $? "adding a user with username expense"
