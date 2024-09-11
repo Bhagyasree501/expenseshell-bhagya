@@ -78,7 +78,7 @@ cp /home/ec2-user/expenseshell-bhagya/backend.service /etc/systemd/system/backen
 dnf install mysql -y &>>$FILE_NAME
 VALIDATE $? "installing mysql client on backendserver"
 
-mysql -h 172.31.80.119 -uroot -pExpenseApp@1 < /app/schema/backend.sql
+mysql -h 172.31.93.248 -uroot -pExpenseApp@1 < /app/schema/backend.sql
 VALIDATE $? "loading schema"
 
 # trying to start the service now
