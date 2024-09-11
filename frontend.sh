@@ -41,10 +41,10 @@ dnf install nginx -y &>>$FILE_NAME
 VALIDATE $? "installing Nginx"
 
 systemctl enable nginx &>>$FILE_NAME
-VALIDATE $? "enabling nignx"
+VALIDATE $? "enabling nginx"
 
-systemctl start nignx &>>$FILE_NAME
-VALIDATE $? "starting nignx"
+systemctl start nginx &>>$FILE_NAME
+VALIDATE $? "starting nginx"
 
 rm rf /usr/share/nginx/html/*
 
