@@ -46,10 +46,10 @@ VALIDATE $? "enabling mysql server"
 systemctl start mysqld
 VALIDATE $? "starting mysql server"
 
-mysql -h 172.31.91.159 -u root -pExpenseApp@1 -e 'show databases;' &>> $FILE_NAME
+mysql -h 172.31.80.119 -u root -pExpenseApp@1 -e 'show databases;' &>> $FILE_NAME
 if [ $? -ne 0 ]
 then
-    echo -e "$Y looks like mysql is not installed. let us install now $N" | tee -a $FILE_NAME
+    echo -e "$Y looks like there is no passowrd for mysql-server yet. let us create one now $N" | tee -a $FILE_NAME
     mysql_secure_installation --set-root-pass ExpenseApp@1
     VALIDATE $? "setting password for mysql server"
 else

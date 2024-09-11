@@ -46,5 +46,50 @@ VALIDATE $? "enabling version 20 of NodeJs"
 dnf install nodejs -y &>> $FILE_NAME
 VALIDATE $? "installing NodeJs"
 
-useradd expense &>> $FILE_NAME
-VALIDATE $? "adding a user with username expense"
+id expense &>> $FILE_NAME
+if [ $? -ne 0 ]
+then
+    echo "hey! looks like exoense user does not exist. creating expense user" | tee -a $FILE_NAME
+    useradd expense &>> $FILE_NAME
+    VALIDATE $? "adding a user with username expense" | tee -a $FILE_NAME
+else
+    echo "hey! user already exists. nothing to do" | tee -a $FILE_NAME
+fi
+
+mkdir -p /app &>>$FILE_NAME
+VALIDATE $? "creating /app directory"
+
+
+curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip &>>$FILE_NAME
+VALIDATE $? "downloading backend application code in zip file"
+
+cd /app
+rm -rf /app* &>>$FILE_NAME
+unzip /tmp/backend.zip &>>$FILE_NAME
+VALIDATE $? "unzip the application code into /app folder"
+
+npm install &>>$FILE_NAME
+VALIDATE $? "downloading the dependencies"
+
+cp /home/ec2-user/expenseshell-bhagya/backend.service /etc/systemd/system/backend.service
+
+# We are trying to access the mysql-server on db server and execute backend.sql there; and generate schema there
+
+dnf install mysql -y &>>$FILE_NAME
+VALIDATE $? "installing mysql client on backendserver"
+
+mysql -h 172.31.80.119 -uroot -pExpenseApp@1 < /app/schema/backend.sql
+VALIDATE $? "loading schema"
+
+# trying to start the service now
+systemctl daemon-reload
+VALIDATE $? "deamon reload"
+
+systemctl restart backend
+VALIDATE $? "restarting backend.service"
+
+systemctl enable backend
+VALIDATE $? "enabling backend.service"
+
+# After the backend service is up and running we have 3 commands to check the status of service. They need to be verified on backend server
+
