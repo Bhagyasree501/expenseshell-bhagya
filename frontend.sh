@@ -48,14 +48,14 @@ VALIDATE $? "starting nginx"
 
 rm -rf /usr/share/nginx/html/*
 
-curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip &>>FILFE_NAME
+curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip &>>$FILE_NAME
 VALIDATE $? "downloading app we code in zip format"
 
-cd /usr/share/nginx/html/
+cd /usr/share/nginx/html/ &>>$FILE_NAME
 unzip /tmp/frontend.zip
 VALIDATE $? "unzipping app web code into html dir"
 
-cp /home/ec2-user/expenseshell-bhagya/expense.conf /etc/nginx/expense.conf
+cp /home/ec2-user/expenseshell-bhagya/expense.conf /etc/nginx/default.d/expense.conf
 
 systemctl restart nginx &>>$FILE_NAME
 VALIDATE $? "restarting nginx"
