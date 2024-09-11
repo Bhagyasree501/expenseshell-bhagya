@@ -48,7 +48,7 @@ VALIDATE $? "starting nginx"
 
 rm -rf /usr/share/nginx/html/*
 
-curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
+curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip &>>FILFE_NAME
 VALIDATE $? "downloading app we code in zip format"
 
 cd /usr/share/nginx/html/
