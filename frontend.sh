@@ -46,7 +46,7 @@ VALIDATE $? "enabling nginx"
 systemctl start nginx &>>$FILE_NAME
 VALIDATE $? "starting nginx"
 
-rm rf /usr/share/nginx/html/*
+rm -rf /usr/share/nginx/html/*
 
 curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
 VALIDATE $? "downloading app we code in zip format"
@@ -57,5 +57,5 @@ VALIDATE $? "unzipping app web code into html dir"
 
 cp /home/ec2-user/expenseshell-bhagya/expense.conf /etc/nginx/expense.conf
 
-systemctl restart niginx &>>$FILE_NAME
+systemctl restart nginx &>>$FILE_NAME
 VALIDATE $? "restarting nginx"
