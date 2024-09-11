@@ -37,7 +37,7 @@ VALIDATE(){
 
 CHECK_ROOT #I am calling CHECK_ROOT function
 
-dnf install nginx &>>$FILE_NAME
+dnf install nginx -y &>>$FILE_NAME
 VALIDATE $? "installing Nginx"
 
 systemctl enable nginx &>>$FILE_NAME
